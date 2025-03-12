@@ -3,10 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Results | Ihlamuddeen Madrasa North Pallar</title>
+    <title>Student Progress Card</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+ <!-- Header Section -->
+ <header class="header">
+    <img src="logo.png" alt="Madrasa Logo" class="logo">
+    <div class="header-text">
+        <h1>مدرسة إعلام الدين الثانوية العليا</h1>
+        <h2>Ihlamudeen Higher Secondary Madrasa</h2>
+        <h3>North Pallar, Vairangode P.O, Thirunnavaya Malappuram (Dist), Kerala-676301</h3>
+    </div>
+</header>
+
     <div class="container">
         <h1>Student Progress Card</h1>
         <form id="searchForm" onsubmit="fetchStudentData(event)">
@@ -14,16 +24,31 @@
                 <label for="admissionNumber">Admission Number:</label>
                 <input type="number" id="admissionNumber" name="admission_number" min="1" required placeholder="Enter Admission Number">
             </div>
+
             <div class="form-group">
                 <label for="class">Class:</label>
-                <input type="text" id="class" name="class" required placeholder="1,2,3,4,6,8,9,11" 
-                    pattern="^(1|2|3|4|6|8|9|11)$" title="Allowed classes: 1, 2, 3, 4, 6, 8, 9, 11">
+                <select id="class" name="class" required>
+                    <option value="" disabled selected>Select Class</option>
+                    <option value="1">Class 1</option>
+                    <option value="2">Class 2</option>
+                    <option value="3">Class 3</option>
+                    <option value="4">Class 4</option>
+                    <option value="6">Class 6</option>
+                    <option value="8">Class 8</option>
+                    <option value="9">Class 9</option>
+                    <option value="11">Class 11</option>
+                </select>
             </div>
+
             <div class="form-group">
                 <label for="division">Division:</label>
-                <input type="text" id="division" name="division" required placeholder="A or B" 
-                    pattern="^[A-B]$" title="Only uppercase letters A or B are allowed">
+                <select id="division" name="division" required>
+                    <option value="" disabled selected>Select Division</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                </select>
             </div>
+
             <button type="submit" class="btn">Search</button>
         </form>
 
@@ -34,4 +59,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-

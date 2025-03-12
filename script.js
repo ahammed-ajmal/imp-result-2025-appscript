@@ -64,12 +64,18 @@ function displayResult(data) {
 
     const studentInfo = `
         <h2>Student Details</h2>
+        <div class="student-basic">
         <p><strong>Name:</strong> ${data.student.name}</p>
         <p><strong>Class:</strong> ${data.student.class}</p>
         <p><strong>Division:</strong> ${data.student.division}</p>
-        <p><strong>Attendance:</strong> ${data.student.attendance}/${data.student.total_working_days}</p>
-        <p><strong>Rank:</strong> ${data.student.rank}</p>
-        <p><strong>Total Subjects:</strong> ${data.student.total_subject}</p>
+        </div>
+        <div class="student-stats">
+        <p><strong>Rank:</strong> <span id="student-rank"></span>${data.student.rank}</p>
+         <p><strong>Obtained Marks:</strong> <span id="student-obtained-marks"></span></p>
+        <p><strong>Total Marks:</strong> <span id="student-total-marks"></span></p>
+         <p><strong>Attendance:</strong> <span id="student-attendance">${data.student.attendance}</span></p>
+        <p><strong>Total Working Days:</strong> <span id="student-working-days">${data.student.total_working_days}</span></p>
+    </div>
     `;
 
     let marksTable = `<h2>Exam Marks</h2>
