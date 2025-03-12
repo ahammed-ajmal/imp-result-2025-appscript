@@ -143,7 +143,7 @@ select {
 }
 /* 
 .form-group::after {
-    content: '▾'; /* Unicode for dropdown arrow */
+    content: '▾'; /* Unicode for dropdown arrow 
     font-size: 14px;
     color: #555;
     position: absolute;
