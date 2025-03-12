@@ -83,12 +83,12 @@ function displayResult(data) {
             <p><strong>Division:</strong> ${data.student.division}</p>
         </div>
         <div class="student-stats">
+            <p><strong>Status:</strong> <span class="status ${isPassed ? 'passed' : 'failed'}">${isPassed ? 'Passed' : 'Failed'}</span></p>
             <p><strong>Rank:</strong> ${data.student.rank}</p>
             <p><strong>Obtained Marks:</strong> ${obtainedMarks}</p>
             <p><strong>Total Marks:</strong> ${totalMarks}</p>
             <p><strong>Attendance:</strong> ${data.student.attendance}</p>
             <p><strong>Total Working Days:</strong> ${data.student.total_working_days}</p>
-            <p><strong>Status:</strong> <span class="status ${isPassed ? 'passed' : 'failed'}">${isPassed ? 'Passed' : 'Failed'}</span></p>
         </div>
     `;
 
