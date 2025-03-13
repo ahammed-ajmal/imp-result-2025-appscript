@@ -54,6 +54,17 @@ function validateForm(admissionNumber, classInput, division) {
     return true;
 }
 
+function calculateGrade(marks) {
+    if (marks >= 45) return "A+";
+    if (marks >= 40) return "A";
+    if (marks >= 35) return "B+";
+    if (marks >= 30) return "B";
+    if (marks >= 25) return "C+";
+    if (marks >= 20) return "C";
+    if (marks >= 18) return "D+";
+    return "D";
+}
+
 function displayResult(data) {
     const resultElement = document.getElementById("result");
 
@@ -62,18 +73,34 @@ function displayResult(data) {
         return;
     }
     
-    // Check if all grades are D+ or above
-    const passingGrades = ["A+", "A", "B+", "B", "C+", "C", "D+", "D"];
-    const isPassed = data.marks.every(mark => passingGrades.includes(mark.grade));
-
-    // Calculate total and obtained marks
     let totalMarks = 0;
     let obtainedMarks = 0;
+    let allGrades = [];
+
+    let marksTable = `<h2>Exam Marks</h2>
+        <table>
+            <tr><th>Subject</th><th>Max Mark</th><th>Obtained Mark</th><th>Grade</th></tr>`;
 
     data.marks.forEach(mark => {
+        const grade = calculateGrade(parseInt(mark.obtained_mark));
+        allGrades.push(grade); // Collect grades to check pass/fail
+
         totalMarks += parseInt(mark.max_mark);
         obtainedMarks += parseInt(mark.obtained_mark);
+
+        marksTable += `<tr>
+            <td>${mark.subject}</td>
+            <td>${mark.max_mark}</td>
+            <td>${mark.obtained_mark}</td>
+            <td>${grade}</td>
+        </tr>`;
     });
+
+    marksTable += `</table>`;
+
+    // Check if the student is passed (all grades should be D+ or above)
+    const passingGrades = ["A+", "A", "B+", "B", "C+", "C", "D+"];
+    const isPassed = allGrades.every(grade => passingGrades.includes(grade));
 
     const studentInfo = `
         <h2>Student Details</h2>
@@ -83,7 +110,7 @@ function displayResult(data) {
             <p><strong>Division:</strong> ${data.student.division}</p>
         </div>
         <div class="student-stats">
-            <p><strong>Status:</strong> <span class="status ${isPassed ? 'passed' : 'failed'}">${isPassed ? 'Passed' : 'Failed'}</span></p>
+        <p><strong>Status:</strong> <span class="status ${isPassed ? 'passed' : 'failed'}">${isPassed ? 'Passed' : 'Failed'}</span></p>
             <p><strong>Rank:</strong> ${data.student.rank}</p>
             <p><strong>Obtained Marks:</strong> ${obtainedMarks}</p>
             <p><strong>Total Marks:</strong> ${totalMarks}</p>
@@ -91,21 +118,6 @@ function displayResult(data) {
             <p><strong>Total Working Days:</strong> ${data.student.total_working_days}</p>
         </div>
     `;
-
-    let marksTable = `<h2>Exam Marks</h2>
-        <table>
-            <tr><th>Subject</th><th>Max Mark</th><th>Obtained Mark</th><th>Grade</th></tr>`;
-
-    data.marks.forEach(mark => {
-        marksTable += `<tr>
-            <td>${mark.subject}</td>
-            <td>${mark.max_mark}</td>
-            <td>${mark.obtained_mark}</td>
-            <td>${mark.grade}</td>
-        </tr>`;
-    });
-
-    marksTable += `</table>`;
 
     resultElement.innerHTML = studentInfo + marksTable;
 }
